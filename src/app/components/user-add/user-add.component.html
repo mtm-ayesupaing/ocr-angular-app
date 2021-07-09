@@ -1,0 +1,54 @@
+<h1 mat-dialog-title>Add User</h1>
+
+<div mat-dialog-content class="content">
+    <form style="width: 100%" [formGroup]="userForms">
+        <mat-form-field class="full-width-form">
+            <mat-label>Name</mat-label>
+            <input type="name" matInput [formControl]="userForms.controls.name" placeholder="例) ちえのわ">
+            <mat-error *ngIf="userForms.controls.name.hasError('required')">
+                {{errorMsg.FORMAT_ERROR.REQUIRED('名前')}}
+            </mat-error>
+        </mat-form-field>
+        <br>
+        <mat-form-field class="full-width-form">
+            <mat-label>Email</mat-label>
+            <input type="email" matInput [formControl]="userForms.controls.email" placeholder="例) chienowa@example.com">
+            <mat-error *ngIf="userForms.controls.email.hasError('email') && !userForms.controls.email.hasError('required')">
+                {{errorMsg.FORMAT_ERROR.DATA_FORMAT('Email', 'xxxxx@xx.xx')}}
+            </mat-error>
+            <mat-error *ngIf="userForms.controls.email.hasError('required')">
+                {{errorMsg.FORMAT_ERROR.REQUIRED('Email')}}
+            </mat-error>
+            <mat-error *ngIf="userForms.controls.email.hasError('conflicted')">
+                {{errorMsg.FORMAT_ERROR.CONFLICTED('Email')}}
+            </mat-error>
+        </mat-form-field>
+        <!-- Password Input -->
+        <mat-form-field  class="full-width-form">
+            <input matInput type="password" formControlName="password" placeholder="パスワード">
+            <mat-error *ngIf="userForms.controls.password.hasError('required')">
+                {{errorMsg.FORMAT_ERROR.REQUIRED('パスワード')}}
+            </mat-error>
+            <mat-error *ngIf="userForms.controls.password.hasError('minlength')">
+                {{errorMsg.FORMAT_ERROR.MIN_LENGTH('パスワード', 8)}}
+            </mat-error>
+            <mat-error *ngIf="userForms.controls.password.hasError('maxlength')">
+                {{errorMsg.FORMAT_ERROR.MAX_LENGTH('パスワード', 100)}}
+            </mat-error>
+        </mat-form-field>
+        <!-- <br>
+        <mat-form-field appearance="fill" class="full-width-form">
+            <mat-label>権限</mat-label>
+            <mat-select [formControl]="userForms.controls.role">
+                <mat-option *ngFor="let role of masters.ROLES" [value]="role.value" [attr.data-cy]="'memberAddRole-' + role.value">{{role.name}}</mat-option>
+            </mat-select>
+            <mat-error *ngIf="userForms.controls.role.hasError('required')">
+                {{errorMsg.FORMAT_ERROR.REQUIRED('権限')}}
+            </mat-error>
+        </mat-form-field> -->
+    </form>
+</div>
+<div mat-dialog-actions align="end">
+    <!-- <button mat-button (click)="onCancelClick()">キャンセル</button>
+    <button mat-raised-button (click)="onAddClick()" color="primary" [disabled]="disableFlag || userForms.invalid" >追加</button> -->
+</div>

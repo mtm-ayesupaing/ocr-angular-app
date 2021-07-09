@@ -1,0 +1,111 @@
+<div class="incident-list-container">
+    <mat-card class="create-incident">
+  
+      <h4>New Restaurant</h4>
+      <form class="incident-block" #restaurantAddForm="ngForm" (ngSubmit)="createRestaurant()">
+        <!-- Restaurant Name -->
+        <mat-form-field class="incident-name">
+          <input matInput type="text"
+            placeholder="レストラン名"
+            name="name" #name="ngModel"
+            [(ngModel)]="restaurant.name"            
+            maxlength="255"
+            required>
+        </mat-form-field>
+        <!-- Pictures -->
+        
+  
+        <div class="btn-block">
+          <button mat-raised-button color="primary" class="incident-btn" [disabled]="restaurantAddForm.invalid || restaurant.isError"
+            type='submit'>
+            レストランを作成
+          </button>
+        </div>
+      </form>
+    </mat-card>
+  
+    <mat-card class="incident-list">
+      <div class="incident-title">Restaurant List</div>
+      <mat-table [dataSource]="dataSource" class="incident-table" *ngIf="restaurants.length > 0" incidents>
+        <!-- Id Column -->
+        <ng-container matColumnDef="id">
+          <mat-header-cell *matHeaderCellDef class="incident-table-title"> Id </mat-header-cell>
+          <mat-cell *matCellDef="let row" class="incident-table-label"> {{row.id}} </mat-cell>
+        </ng-container>
+  
+        <!-- Name Column -->
+        <ng-container matColumnDef="name">
+          <mat-header-cell *matHeaderCellDef class="incident-name-title"> レストラン名 </mat-header-cell>
+          <mat-cell *matCellDef="let row" class="incident-name-label">
+            <div class="incident-col-name">
+              <span *ngIf="!row.isEdit">{{row.name}}</span>
+  
+              <mat-form-field *ngIf="row.isEdit" [hideRequiredMarker]="true">
+                <input matInput type="text"
+                  placeholder="レストラン名"
+                  name="name" #name="ngModel"
+                  [(ngModel)]="row.updateRestaurantName"
+                  maxlength="255"
+                  (input)="isNoValue(row)"
+                  required>
+              </mat-form-field>
+            </div>
+            <div class="edit-block">              
+              <button mat-icon-button class="cancel-btn"
+                *ngIf="row.isEdit"
+                [disableRipple]="true"
+                (click)="updateRestaurant(row,true)">
+                <mat-icon class="icon" >
+                  cancel
+                </mat-icon>
+              </button>
+  
+              <button mat-icon-button class="edit-btn"
+                [disableRipple]="true"
+                [disabled]="row.isError"
+                (click)="updateRestaurant(row)">
+                <mat-icon class="icon">
+                  {{!row.isEdit ? 'edit' : 'check_circle'}}
+                </mat-icon>
+              </button>
+            </div>
+          </mat-cell>
+        </ng-container>
+  
+        <!-- Description Column -->
+        <ng-container matColumnDef="description">
+          <mat-header-cell *matHeaderCellDef class="incident-table-title"> Description </mat-header-cell>
+          <mat-cell *matCellDef="let row" class="incident-table-label"> {{row.description}} </mat-cell>
+        </ng-container>
+  
+        <!-- action Column -->
+        <ng-container matColumnDef="action">
+          <mat-header-cell *matHeaderCellDef class="incident-table-action"> </mat-header-cell>
+          <mat-cell *matCellDef="let row; let i=index" class="incident-table-action">
+            <!-- <div class="detail-btn">
+              <button mat-raised-button color="primary" (click)="toHome(row)">
+                作業開始
+              </button>
+            </div> -->
+            <div>
+              <button mat-icon-button
+                (click)="deleteRestaurant(row, i)">
+                <mat-icon class="icon">delete</mat-icon>
+              </button>
+            </div>
+          </mat-cell> 
+        </ng-container>
+  
+        <mat-header-row *matHeaderRowDef="displayedColumns;sticky: true"></mat-header-row>
+        <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+      </mat-table>
+      <!-- <div class="table-action">
+        <div class="table-status">
+        </div>
+        <mat-paginator [style.visibility]="incidents.length > 0? 'visible':'hidden'" class="paginator"
+          [length]="incidents.length" [pageSize]="25" [pageSizeOptions]="[25, 50, 100]">
+        </mat-paginator>
+      </div> -->
+    </mat-card>
+  </div>
+  

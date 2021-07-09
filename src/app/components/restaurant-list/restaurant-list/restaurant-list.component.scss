@@ -1,0 +1,217 @@
+@import "../../../../variable";
+
+.incident-list-container {
+  width: 100%;
+  display: inline-block;
+
+  .create-incident {
+    margin-bottom: 10px;
+
+    h4 {
+      font-size: 14px;
+      font-weight: bold;
+    }
+
+    .incident-block {
+      display: inline-block;
+      width: 100%;
+
+      .incident-name {
+        display: inline-block;
+        width: calc(100% - 260px);
+        margin-right: 40px;
+      }
+
+      .incident-date {
+        display: inline-block;
+        width: 220px;
+
+        .today-icon {
+          font-size: 14px;
+          height: 15px;
+          vertical-align: text-bottom;
+          cursor: pointer;
+        }
+      }
+    }
+
+    .btn-block {
+      text-align: right;
+      margin-top: 10px;
+
+      .incident-btn {
+        font-size: 12px;
+        padding: 0 30px;
+        line-height: 30px;
+      }
+    }
+
+    .mat-form-field-label {
+      font-size: 11px;
+      top: 1.78125em;
+    }
+
+  }
+
+  .incident-list {
+    padding: 16px 0 0;
+    border: 1px solid #f4f4f4;
+    min-height: calc(100vh - 377px);
+
+    .incident-title {
+      margin: 0 24px 13px 16px;
+      font-size: 14px;
+      font-weight: bold;
+    }
+
+    .incident-table {
+      width: 100%;
+      overflow-x: hidden;
+      overflow-y: auto;
+      max-height: calc(100vh - 377px);
+      min-height: 50px;
+
+      .mat-header-row {
+        min-height: 41px;
+      }
+
+      .mat-header-cell {
+        font-size: 11px;
+        min-height: auto;
+        color: #000000;
+      }
+
+      .mat-header-cell:first-of-type,
+      .mat-cell:first-of-type {
+        padding-left: 16px;
+      }
+
+      .mat-cell {
+        min-height: auto;
+        font-size: 13px;
+        word-break: break-word;
+        margin-right: 2px;
+      }
+
+      .incident-table-title,
+      .incident-table-label,
+      .incident-name-title,
+      .incident-name-label,
+      .incident-date-title,
+      .incident-date-label,
+      .incident-table-action {
+        flex: none;
+      }
+
+      .incident-name-title,
+      .incident-name-label {
+        width: 35%;
+
+        .incident-col-name {
+          max-width: calc(100% - 50px);
+          margin-right: 2px;
+          display: inline-block;
+
+          .mat-form-field-infix {
+            padding: 0 !important;
+            border: 0;
+            display: inline-block;
+          }
+
+          .mat-input-element {
+            font-size: 10px;
+          }
+
+          .mat-form-field-wrapper {
+            padding-bottom: 0 !important;
+
+            .mat-form-field-underline {
+              bottom: 0 !important;
+              top: 17px;
+            }
+          }
+
+          .mat-form-field-label-wrapper {
+            font-size: 9px;
+          }
+        }
+
+        .edit-block {
+          max-width: 48px;
+          display: inline-block;
+
+          .edit-btn {
+            width: 24px;
+            color: map-get($icon-color, "update");
+          }
+
+          .mat-button-disabled {
+            color: #bdbdbd !important;
+          }
+
+          .cancel-btn {
+            width: 24px;
+            color: map-get($icon-color, "rollback");
+          }
+
+          .mat-icon {
+            font-size: 20px;
+          }
+        }
+      }
+
+      .incident-date-title,
+      .incident-date-label {
+        width: 25%;
+      }
+
+      .incident-table-title,
+      .incident-table-label {
+        width: 20%;
+      }
+
+      .incident-table-action {
+        width: 100px;
+        text-align: right;
+
+        @media only screen and (max-width: 1121px) {
+          width: 70px;
+        }
+      }
+
+      .detail-btn {
+        width: 100%;
+        text-align: right;
+
+        .mat-raised-button {
+          line-height: 30px;
+          font-size: 10px;
+        }
+      }
+    }
+  }
+
+  .table-action {
+    width: 100%;
+    display: inline-block;
+
+    .table-status {
+      width: calc(100% - 379px);
+      display: inline-block;
+      margin-left: 24px;
+    }
+
+    .paginator {
+      width: 355px;
+      display: inline-block;
+
+      .mat-paginator-page-size-label {
+        color: #000000;
+      }
+    }
+  }
+
+  .mat-error {
+    font-size: 8px;
+  }
+}
